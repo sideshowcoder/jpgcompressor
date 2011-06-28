@@ -1,5 +1,5 @@
-version: 0.1
-description: Compress JPEG Images using a passed compression factor
+version: 0.2
+description: Compress JPEG Images using a passed desired size
 author: Philipp Fehre <philipp.fehre@googlemail.com>
 license: BSD
 copyright: Copyright (c) 2011 by Philipp Fehre
