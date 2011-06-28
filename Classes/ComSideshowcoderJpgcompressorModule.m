@@ -88,20 +88,24 @@
 
 -(id)compress:(id)args;
 {
-  NSData* imageData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], 
-                                                [[self valueForUndefinedKey:@"compressFactor"] floatValue]);
+  NSData *imageData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], 1.0);
+  if ([imageData length] > [[self valueForUndefinedKey:@"compressSize"] intValue]) {
+    CGFloat compressFactor = [[self valueForUndefinedKey:@"compressSize"] floatValue] / [[NSNumber numberWithUnsignedInt:[imageData length]] floatValue];
+    NSData* compressedData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], compressFactor);    
+    return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:compressedData]] autorelease];
+  }
   return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:imageData]] autorelease];
 }
 
--(id)compressFactor
+-(id)compressSize
 {
-	return [self valueForUndefinedKey:@"compressFactor"]; 
+	return [self valueForUndefinedKey:@"compressSize"]; 
 }
 
--(void)setCompressFactor:(id)value
+-(void)setCompressSize:(id)value
 {
   [self replaceValue:[TiUtils numberFromObject:value] 
-              forKey:@"compressFactor" 
+              forKey:@"compressSize" 
         notification:NO];
 }
 

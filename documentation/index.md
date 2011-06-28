@@ -12,13 +12,13 @@ To access this module from JavaScript, you would do the following:
 
 ## Reference
 
-### jpgcompressor.setCompressFactor
+### jpgcompressor.setCompressSize
 
-Set the compress factor passed to UIImageJPEGRepresentation
+Set the compress desired size to calculate UIImageJPEGRepresentation factor via compressSize/imageSize
 
 ### jpgcompressor.compressFactor
 
-Read the compress factor passed to UIImageJPEGRepresentation
+Read the compress desired size
 
 ### jpgcompressor.compress
 
@@ -27,7 +27,7 @@ Pass image as Blob to be compressed
 
 ## Usage
 
-  jpgcompressor.setCompressFactor(0.5);
+  jpgcompressor.setCompressFactor(1000);
   var f = Ti.Filesystem.getFile('test.jpg');
   var img = f.read.blob;
   var compressedImg = jpgcompressor.compress(img);

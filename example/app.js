@@ -34,9 +34,9 @@ Ti.API.info('module is => ' + jpgcompressor);
 // Test
 
 // Set and read compress Factor
-Ti.API.info('Set compress Factor to 0.5...');
-jpgcompressor.setCompressFactor(0.1);
-Ti.API.info('Compress Factor: ' + jpgcompressor.compressFactor);
+Ti.API.info('Set compress Size to 4...');
+jpgcompressor.setCompressSize(4);
+Ti.API.info('Compress Size: ' + jpgcompressor.compressSize);
 
 // Compress an image
 var cImg = jpgcompressor.compress(img);

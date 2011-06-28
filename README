@@ -5,7 +5,7 @@ Author: Philipp Fehre [Website](http://sideshowcoder.com)
 
 Description
 -----------
-Passing through UIImageJPEGRepresentation option to compress images passed as a TiBlob.
+Passing through UIImageJPEGRepresentation option to compress images passed as a TiBlob. 
 
 Usage
 -----
