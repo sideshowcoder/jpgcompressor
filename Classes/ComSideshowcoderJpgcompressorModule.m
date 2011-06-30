@@ -89,9 +89,11 @@
 -(id)compress:(id)args;
 {
   NSData *imageData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], 1.0);
+  NSLog(@"[DEBUG] Received data size: %u Desired size: %@", [imageData length], [self valueForUndefinedKey:@"compressSize"]);
   if ([imageData length] > [[self valueForUndefinedKey:@"compressSize"] intValue]) {
     CGFloat compressFactor = [[self valueForUndefinedKey:@"compressSize"] floatValue] / [[NSNumber numberWithUnsignedInt:[imageData length]] floatValue];
     NSData* compressedData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], compressFactor);    
+    NSLog(@"[DEBUG] Compressed size: %u Compress Factor: %f", [compressedData length], compressFactor);
     return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:compressedData]] autorelease];
   }
   return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:imageData]] autorelease];
