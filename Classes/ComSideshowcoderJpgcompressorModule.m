@@ -86,16 +86,34 @@
 
 #pragma Public APIs
 
--(id)compress:(id)args;
+-(id)compress:(id)args
 {
+  // Get the local values for set keys needed
+  NSNumber *cs = [self compressSize];
+  NSNumber *cq = [self worstCompressQuality];
+  // Get the data
   NSData *imageData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], 1.0);
-  NSLog(@"[DEBUG] Received data size: %u Desired size: %@", [imageData length], [self valueForUndefinedKey:@"compressSize"]);
-  if ([imageData length] > [[self valueForUndefinedKey:@"compressSize"] intValue]) {
-    CGFloat compressFactor = [[self valueForUndefinedKey:@"compressSize"] floatValue] / [[NSNumber numberWithUnsignedInt:[imageData length]] floatValue];
+  
+  // DEBUG OUTPUT
+  NSLog(@"[DEBUG] Received data size: %u Desired size: %@", [imageData length], cs);
+  
+  // Check if data is larger than desired
+  if ([imageData length] > [cs intValue]) {
+    // Calculate the needed compression and check if 
+    CGFloat compressFactor = [cs floatValue] / [[NSNumber numberWithUnsignedInt:[imageData length]] floatValue];
+    if(compressFactor < [cq floatValue]) {
+      NSLog(@"[DEBUG] Compress Factor: %f Worst Quality: %f", compressFactor, [cq floatValue]);      
+      compressFactor = [cq floatValue];
+    }
     NSData* compressedData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], compressFactor);    
+    
+    // DEBUG OUTPUT    
     NSLog(@"[DEBUG] Compressed size: %u Compress Factor: %f", [compressedData length], compressFactor);
+    
+    // return the compressed image
     return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:compressedData]] autorelease];
   }
+  // return the uncompressed image
   return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:imageData]] autorelease];
 }
 
@@ -108,6 +126,22 @@
 {
   [self replaceValue:[TiUtils numberFromObject:value] 
               forKey:@"compressSize" 
+        notification:NO];
+}
+
+-(id)worstCompressQuality
+{
+  // when set return value else return 1 as it is 100% quality
+  if ([self valueForUndefinedKey:@"worstCompressQuality"]) {
+    return[self valueForUndefinedKey:@"worstCompressQuality"];
+  }
+  return [NSNumber numberWithInt:0];
+}
+
+-(void)setWorstCompressQuality:(id)value
+{
+  [self replaceValue:[TiUtils numberFromObject:value]
+              forKey:@"worstCompressQuality"
         notification:NO];
 }
 

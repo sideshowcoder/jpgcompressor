@@ -10,4 +10,10 @@
 {
 }
 
+-(id)compress:(id)args;
+-(id)compressSize;
+-(void)setCompressSize:(id)value;
+-(id)worstCompressQuality;
+-(void)setWorstCompressQuality:(id)value;
+
 @end

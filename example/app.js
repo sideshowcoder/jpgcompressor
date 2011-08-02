@@ -21,10 +21,18 @@ var cImgView = Ti.UI.createImageView({
   top: 200,
   width: 100,
   left: 20
-})
+});
+
+var c2ImgView = Ti.UI.createImageView({
+  top: 300,
+  width: 100,
+  left: 20
+});
+
 
 window.add(nImgView);
 window.add(cImgView);
+window.add(c2ImgView);
 window.open();
 
 // Init module
@@ -34,15 +42,22 @@ Ti.API.info('module is => ' + jpgcompressor);
 // Test
 
 // Set and read compress Factor
-Ti.API.info('Set compress Size to 4...');
-jpgcompressor.setCompressSize(4);
+Ti.API.info('Set compress Size to 1000...');
+jpgcompressor.setCompressSize(1000);
 Ti.API.info('Compress Size: ' + jpgcompressor.compressSize);
+Ti.API.info('Unset worst quality: ' + jpgcompressor.worstCompressQuality);
 
 // Compress an image
 var cImg = jpgcompressor.compress(img);
+jpgcompressor.setCompressSize(100);
+Ti.API.info('Set compress Size to 100...');
+jpgcompressor.setWorstCompressQuality(0.2);
+Ti.API.info('Compress Size: ' + jpgcompressor.compressSize);
+Ti.API.info('Unset worst quality: ' + jpgcompressor.worstCompressQuality);
+var c2Img = jpgcompressor.compress(img);
 nImgView.setImage(img);
 cImgView.setImage(cImg);
-
+c2ImgView.setImage(c2Img);
 
 
 

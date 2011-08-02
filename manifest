@@ -1,4 +1,4 @@
-version: 0.2
+version: 0.3
 description: Compress JPEG Images using a passed desired size
 author: Philipp Fehre <philipp.fehre@googlemail.com>
 license: BSD
