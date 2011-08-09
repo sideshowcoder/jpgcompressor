@@ -2,10 +2,11 @@ Titanium JPGCompressor
 ======================
 
 Author: Philipp Fehre [Website](http://sideshowcoder.com)
+Repository: https://github.com/sideshowcoder/jpgcompressor
 
 Description
 -----------
-Passing through UIImageJPEGRepresentation option to compress images passed as a TiBlob. 
+Passing through UIImageJPEGRepresentation option to compress and scale images passed as a TiBlob. 
 
 Usage
 -----

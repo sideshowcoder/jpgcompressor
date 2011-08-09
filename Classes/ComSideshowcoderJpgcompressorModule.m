@@ -117,6 +117,24 @@
   return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:imageData]] autorelease];
 }
 
+-(id)scale:(id)args
+{
+  // Storage for the scale size
+  CGSize newSize;
+  // Get the values needed from the arguments
+  UIImage *image = [[args objectAtIndex:0] image];
+  newSize.width = [[TiUtils numberFromObject:[args objectAtIndex:1]] floatValue];
+  newSize.height = [[TiUtils numberFromObject:[args objectAtIndex:2]] floatValue];
+  NSLog(@"[NSDebug] Scale size: %f x %f", newSize.width, newSize.height);
+  // Do actual scaling
+  UIGraphicsBeginImageContext(newSize);
+  [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+  UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  // Return scaled image as blob
+  return [[[TiBlob alloc] initWithImage:newImage] autorelease];
+}
+
 -(id)compressSize
 {
 	return [self valueForUndefinedKey:@"compressSize"]; 
@@ -144,5 +162,6 @@
               forKey:@"worstCompressQuality"
         notification:NO];
 }
+
 
 @end

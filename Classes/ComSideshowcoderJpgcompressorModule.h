@@ -11,6 +11,7 @@
 }
 
 -(id)compress:(id)args;
+-(id)scale:(id)args;
 -(id)compressSize;
 -(void)setCompressSize:(id)value;
 -(id)worstCompressQuality;

@@ -11,28 +11,27 @@ var window = Ti.UI.createWindow({
 
 var f = Ti.Filesystem.getFile('test.jpg');
 var img = f.read.blob;
-var nImgView = Ti.UI.createImageView({
-  top: 0,
-  width: 200,
-  left: 20
-});
-
 var cImgView = Ti.UI.createImageView({
-  top: 200,
-  width: 100,
+  top: 100,
+  width: 50,
   left: 20
 });
 
 var c2ImgView = Ti.UI.createImageView({
-  top: 300,
-  width: 100,
+  top: 200,
+  width: 50,
   left: 20
 });
 
+var sImgView = Ti.UI.createImageView({
+	top: 300,
+	width: 100,
+	left: 20
+});
 
-window.add(nImgView);
 window.add(cImgView);
 window.add(c2ImgView);
+window.add(sImgView);
 window.open();
 
 // Init module
@@ -55,9 +54,15 @@ jpgcompressor.setWorstCompressQuality(0.2);
 Ti.API.info('Compress Size: ' + jpgcompressor.compressSize);
 Ti.API.info('Unset worst quality: ' + jpgcompressor.worstCompressQuality);
 var c2Img = jpgcompressor.compress(img);
-nImgView.setImage(img);
 cImgView.setImage(cImg);
 c2ImgView.setImage(c2Img);
+
+// Scale image
+Ti.API.info('Image width: ' + img.width + ' heigth: ' + img.height );
+var sImg = jpgcompressor.scale(img, 100, 100);
+Ti.API.info('Scaled image width: ' + sImg.width + ' heigth: ' + sImg.height );
+sImgView.setImage(sImg);
+
 
 
 
