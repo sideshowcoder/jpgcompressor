@@ -6,62 +6,53 @@
 
 // open a single window
 var window = Ti.UI.createWindow({
-	backgroundColor:'white'
+	backgroundColor:'black'
 });
 
-var f = Ti.Filesystem.getFile('test.jpg');
-var img = f.read.blob;
-var cImgView = Ti.UI.createImageView({
-  top: 100,
-  width: 50,
-  left: 20
+// Load images
+var images = []
+var f144 = Ti.Filesystem.getFile('144K.JPG');
+images.push(f144.read.blob);
+var f1500 = Ti.Filesystem.getFile('1500K.JPG');
+images.push(f1500.read.blob);
+var f191 = Ti.Filesystem.getFile('191K.JPG');
+images.push(f191.read.blob);
+var f324 = Ti.Filesystem.getFile('324K.JPG');
+images.push(f324.read.blob);
+
+var iv = Ti.UI.createImageView({
+  top: 30,
+  left: 0
 });
 
-var c2ImgView = Ti.UI.createImageView({
-  top: 200,
-  width: 50,
-  left: 20
+var btn = Ti.UI.createButton({
+  top: 0,
+  height: 30,
+  title: 'Press to Switch Images',
+  left: 0
 });
 
-var sImgView = Ti.UI.createImageView({
-	top: 300,
-	width: 100,
-	left: 20
-});
-
-window.add(cImgView);
-window.add(c2ImgView);
-window.add(sImgView);
+window.add(iv);
+window.add(btn);
 window.open();
 
 // Init module
 var jpgcompressor = require('com.sideshowcoder.jpgcompressor');
 Ti.API.info('module is => ' + jpgcompressor);
 
-// Test
+// Set and read compress Factor to 100Kb
+jpgcompressor.setCompressSize(102400);
+jpgcompressor.setWorstCompressQuality(0.65);
 
-// Set and read compress Factor
-Ti.API.info('Set compress Size to 1000...');
-jpgcompressor.setCompressSize(1000);
-Ti.API.info('Compress Size: ' + jpgcompressor.compressSize);
-Ti.API.info('Unset worst quality: ' + jpgcompressor.worstCompressQuality);
+var curr = 0;
+var names = ['144K', '1500K', '191K', '324K'];
 
-// Compress an image
-var cImg = jpgcompressor.compress(img);
-jpgcompressor.setCompressSize(100);
-Ti.API.info('Set compress Size to 100...');
-jpgcompressor.setWorstCompressQuality(0.2);
-Ti.API.info('Compress Size: ' + jpgcompressor.compressSize);
-Ti.API.info('Unset worst quality: ' + jpgcompressor.worstCompressQuality);
-var c2Img = jpgcompressor.compress(img);
-cImgView.setImage(cImg);
-c2ImgView.setImage(c2Img);
-
-// Scale image
-Ti.API.info('Image width: ' + img.width + ' heigth: ' + img.height );
-var sImg = jpgcompressor.scale(img, 100, 100);
-Ti.API.info('Scaled image width: ' + sImg.width + ' heigth: ' + sImg.height );
-sImgView.setImage(sImg);
+btn.addEventListener('click', function(){
+  Ti.API.log(names[curr]);
+  cImage = jpgcompressor.scale(images[curr], 960, 960);
+  iv.setImage(jpgcompressor.compress(cImage));
+  curr = (curr + 1) % 4;
+});
 
 
 
