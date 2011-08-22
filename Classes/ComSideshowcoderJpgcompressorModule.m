@@ -125,7 +125,7 @@
   UIImage *image = [[args objectAtIndex:0] image];
   newSize.width = [[TiUtils numberFromObject:[args objectAtIndex:1]] floatValue];
   newSize.height = [[TiUtils numberFromObject:[args objectAtIndex:2]] floatValue];
-  NSLog(@"[NSDebug] Scale size: %f x %f", newSize.width, newSize.height);
+  NSLog(@"[DBEUG] Scale size: %f x %f", newSize.width, newSize.height);
   // Do actual scaling
   UIGraphicsBeginImageContext(newSize);
   [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
