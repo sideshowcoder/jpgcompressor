@@ -11,8 +11,8 @@ var window = Ti.UI.createWindow({
 
 // Load images
 var images = [];
-var names = ['144K.JPG', '1500K.JPG', '191K.jpg', '324K.jpg'];
-var imgNames = ['f144out.jpg', 'f1500out.jpg', 'f191out.jpg', 'f324out.jpg'];
+var names = ['150k.jpg', '1m.jpg', '200k.jpg', '400k.jpg'];
+var imgNames = ['150k_out.jpg', '1m_out.jpg', '200k_out.jpg', '400k_out.jpg'];
 var curr = 0;
 
 names.forEach(function(el, idx, arr){
