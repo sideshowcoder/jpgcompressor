@@ -10,30 +10,39 @@ var window = Ti.UI.createWindow({
 });
 
 // Load images
-var images = []
-var f144 = Ti.Filesystem.getFile('144K.JPG');
-images.push(f144.read.blob);
-var f1500 = Ti.Filesystem.getFile('1500K.JPG');
-images.push(f1500.read.blob);
-var f191 = Ti.Filesystem.getFile('191K.JPG');
-images.push(f191.read.blob);
-var f324 = Ti.Filesystem.getFile('324K.JPG');
-images.push(f324.read.blob);
+var images = [];
+var names = ['144K.JPG', '1500K.JPG', '191K.jpg', '324K.jpg'];
+var imgNames = ['f144out.jpg', 'f1500out.jpg', 'f191out.jpg', 'f324out.jpg'];
+var curr = 0;
+
+names.forEach(function(el, idx, arr){
+  var file = Ti.Filesystem.getFile(el);
+  images.push(file.read.blob);
+});
 
 var iv = Ti.UI.createImageView({
-  top: 30,
+  top: 60,
   left: 0
 });
 
-var btn = Ti.UI.createButton({
+var picBtn = Ti.UI.createButton({
   top: 0,
   height: 30,
   title: 'Press to Switch Images',
   left: 0
 });
 
+var fileBtn = Ti.UI.createButton({
+  top: 30,
+  height: 30,
+  title: 'Press to output file images',
+  left: 0
+});
+
+
 window.add(iv);
-window.add(btn);
+window.add(picBtn);
+window.add(fileBtn);
 window.open();
 
 // Init module
@@ -44,16 +53,25 @@ Ti.API.info('module is => ' + jpgcompressor);
 jpgcompressor.setCompressSize(102400);
 jpgcompressor.setWorstCompressQuality(0.65);
 
-var curr = 0;
-var names = ['144K', '1500K', '191K', '324K'];
-
-btn.addEventListener('click', function(){
-  Ti.API.log(names[curr]);
+picBtn.addEventListener('click', function(){
+  Ti.API.info("Name " + names[curr]);
+  Ti.API.info("Length " + images[curr].length);
   cImage = jpgcompressor.scale(images[curr], 960, 960);
   iv.setImage(jpgcompressor.compress(cImage));
   curr = (curr + 1) % 4;
 });
 
+fileBtn.addEventListener('click', function(){
+  var imgFilePath, imgFile;
+  Ti.API.info("Image output name " + imgNames[curr]);
+  Ti.API.info("Length " + images[curr].length);
+  cImage = jpgcompressor.scale(images[curr], 960, 960);
+  imgFilePath = jpgcompressor.compress(cImage, imgNames[curr]);
+  imgFile = Ti.Filesystem.getFile(imgFilePath);
+  Ti.API.info("File Size " + imgFile.read.blob.length);  
+  iv.setImage(imgFile.read.blob);
+  curr = (curr + 1) % 4;  
+});
 
 
 
