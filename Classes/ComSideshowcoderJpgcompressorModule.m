@@ -86,13 +86,26 @@
 
 #pragma Public APIs
 
--(id)compress:(id)args
+-(id)compress:(NSArray*)args
 {
   // Get the local values for set keys needed
   NSNumber *cs = [self compressSize];
   NSNumber *cq = [self worstCompressQuality];
   // Get the data
-  NSData *imageData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], 1.0);
+  NSData *imageData;
+  // Get the output path if passed
+  NSString *imgName = nil;
+  NSMutableString *path = [NSMutableString string];
+  NSLog(@"[DEBUG] Args lenght: %u", [args count]);  
+  if ([args count] > 1) {
+    ENSURE_ARG_COUNT(args, 2);
+    imageData = [[args objectAtIndex:0] data];
+    imgName = [args objectAtIndex:1];
+    [path appendString:[NSString stringWithFormat:@"%@/%@", NSTemporaryDirectory(), imgName]];
+    NSLog(@"[DEBUG] Output image to path: %@", path);
+  } else {
+    imageData = [[args objectAtIndex:0] data];
+  }
   
   // DEBUG OUTPUT
   NSLog(@"[DEBUG] Received data size: %u Desired size: %@", [imageData length], cs);
@@ -105,16 +118,26 @@
       NSLog(@"[DEBUG] Compress Factor: %f Worst Quality: %f", compressFactor, [cq floatValue]);      
       compressFactor = [cq floatValue];
     }
-    NSData* compressedData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], compressFactor);    
-    
-    // DEBUG OUTPUT    
-    NSLog(@"[DEBUG] Compressed size: %u Compress Factor: %f", [compressedData length], compressFactor);
-    
-    // return the compressed image
-    return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:compressedData]] autorelease];
+    if(imgName != nil){
+      // write to file and return path
+      [UIImageJPEGRepresentation([[args objectAtIndex:0] image], compressFactor) writeToFile:path atomically:YES];
+      return path;
+    } else {
+      // return compressed image
+      NSData* compressedData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], compressFactor);          
+      NSLog(@"[DEBUG] Compressed size: %u Compress Factor: %f", [compressedData length], compressFactor);
+      return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:compressedData]] autorelease];      
+    }
   }
   // return the uncompressed image
-  return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:imageData]] autorelease];
+  if(imgName != nil){
+    // write to file and return path
+    [UIImageJPEGRepresentation([[args objectAtIndex:0] image], 1.0) writeToFile:path atomically:YES];
+    return path;
+  } else {
+    // return compressed image
+    return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:imageData]] autorelease];      
+  }
 }
 
 -(id)scale:(id)args
