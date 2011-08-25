@@ -6,7 +6,18 @@ Repository: https://github.com/sideshowcoder/jpgcompressor
 
 Description
 -----------
-Passing through UIImageJPEGRepresentation option to compress and scale images passed as a TiBlob. 
+### Compression
+Passing through UIImageJPEGRepresentation option to compress and scale images passed as a TiBlob. The resulting image is write to e temporary file if the  name is passed as a secound argument or passed back as a TiBlob if no name is given.
+
+The compression quality is calculated by check the received data size against the desired size the ratio is taken as the
+compression factor. If wortQuality limit is set it is the take as the compression factor if the ratio calculated drops below.
+
+#### Example
+100kb Image desired 50kb compressed -> compression factor 0.5
+100kb Image desired 50kb compressed, worst quality set to 0.6 -> compression factor 0.6
+
+### Scaling
+Scale images using UIGraphicsBeginImageContext to fit the image in the desired size
 
 Usage
 -----

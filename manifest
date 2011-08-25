@@ -1,5 +1,5 @@
-version: 0.4
-description: Compress JPEG Images using a passed desired size
+version: 0.5
+description: Compress JPEG Images using UIImageJPEGRepresentation, and scale using UIGraphicsBeginImageContext
 author: Philipp Fehre <philipp.fehre@googlemail.com>
 license: BSD
 copyright: Copyright (c) 2011 by Philipp Fehre
