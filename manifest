@@ -1,4 +1,4 @@
-version: 0.5
+version: 0.5.1
 description: Compress JPEG Images using UIImageJPEGRepresentation, and scale using UIGraphicsBeginImageContext
 author: Philipp Fehre <philipp.fehre@googlemail.com>
 license: BSD

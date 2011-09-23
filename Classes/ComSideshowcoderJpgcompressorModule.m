@@ -126,7 +126,7 @@
       // return compressed image
       NSData* compressedData = UIImageJPEGRepresentation([[args objectAtIndex:0] image], compressFactor);          
       NSLog(@"[DEBUG] Compressed size: %u Compress Factor: %f", [compressedData length], compressFactor);
-      return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:compressedData]] autorelease];      
+      return [[[TiBlob alloc] initWithData:compressedData mimetype:@"application/octet-stream"] autorelease];
     }
   }
   // return the uncompressed image
@@ -135,8 +135,8 @@
     [UIImageJPEGRepresentation([[args objectAtIndex:0] image], 1.0) writeToFile:path atomically:YES];
     return path;
   } else {
-    // return compressed image
-    return [[[TiBlob alloc] initWithImage:[UIImage imageWithData:imageData]] autorelease];      
+    // return uncompressed image
+    return [[[TiBlob alloc] initWithData:imageData mimetype:@"application/octet-stream"] autorelease];
   }
 }
 
