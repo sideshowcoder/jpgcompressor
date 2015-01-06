@@ -7,10 +7,15 @@ Repository: https://github.com/sideshowcoder/jpgcompressor
 Description
 -----------
 ### Compression
-Passing through UIImageJPEGRepresentation option to compress and scale images passed as a TiBlob. The resulting image is write to e temporary file if the  name is passed as a secound argument or passed back as a TiBlob if no name is given.
+Passing through UIImageJPEGRepresentation option to compress and scale images
+passed as a TiBlob. The resulting image is write to e temporary file if the
+name is passed as a secound argument or passed back as a TiBlob if no name is
+given.
 
-The compression quality is calculated by check the received data size against the desired size the ratio is taken as the
-compression factor. If wortQuality limit is set it is the take as the compression factor if the ratio calculated drops below.
+The compression quality is calculated by check the received data size against
+the desired size the ratio is taken as the compression factor. If wortQuality
+limit is set it is the take as the compression factor if the ratio calculated
+drops below.
 
 #### Example
 100kb Image desired 50kb compressed -> compression factor 0.5
@@ -21,5 +26,9 @@ Scale images using UIGraphicsBeginImageContext to fit the image in the desired s
 
 Usage
 -----
-See example app.js
+See `example/app.js`
+
+Testing
+-------
+Run the example app and follow it's log see `example/app.js` for more details
 

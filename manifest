@@ -10,4 +10,5 @@ name: jpgcompressor
 moduleid: com.sideshowcoder.jpgcompressor
 guid: ff873835-cf92-4d21-b2c0-0f577f0ce8f3
 platform: iphone
-minsdk: 1.7.2
+minsdk: 3.4.1.GA
+architectures: armv7 i386 x86_64 arm64
