@@ -1,13 +1,17 @@
-// This is a test harness for your module
-// You should do something interesting in this harness 
-// to test out the module and to provide instructions 
-// to users on how to use it by example.
+// This sample loops over the included images on a button press and will
+// compress them and output some data about the compression.
+//
+// You can run it via
+//
+// $ ~/Library/Application\ Support/Titanium/mobilesdk/osx/3.4.1.GA/titanium.py run
+//
+// from the project root directory
+//
+// follow the output in
+//
+// ~/Library/Developer/CoreSimulator/Devices/[DEVICE_ID]/data/Containers/Data/[APPLICATION_ID]/Documents/*.log
 
-
-// open a single window
-var window = Ti.UI.createWindow({
-	backgroundColor:'black'
-});
+var window = Ti.UI.createWindow();
 
 // Load images
 var images = [];
@@ -68,9 +72,9 @@ fileBtn.addEventListener('click', function(){
   cImage = jpgcompressor.scale(images[curr], 960, 960);
   imgFilePath = jpgcompressor.compress(cImage, imgNames[curr]);
   imgFile = Ti.Filesystem.getFile(imgFilePath);
-  Ti.API.info("File Size " + imgFile.read.blob.length);  
+  Ti.API.info("File Size " + imgFile.read.blob.length);
   iv.setImage(imgFile.read.blob);
-  curr = (curr + 1) % 4;  
+  curr = (curr + 1) % 4;
 });
 
 
