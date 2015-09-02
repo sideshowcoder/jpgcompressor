@@ -26,7 +26,7 @@ Scale images using UIGraphicsBeginImageContext to fit the image in the desired s
 
 Usage
 -----
-See `example/app.js`
+See `example/app.js` and https://github.com/sideshowcoder/jpgcompressor/blob/master/documentation/index.md
 
 Testing
 -------
