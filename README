@@ -32,3 +32,12 @@ Testing
 -------
 Run the example app and follow it's log see `example/app.js` for more details
 
+Setup
+-----
+Install the CLI tools via `npm install appcelerator -g` and install the needed 
+sdk after by running `appc setup` and `titanium sdk install 3.5.0.GA`. Now you can 
+build the module by going into the folder and run `python build.py`.
+
+NOTE: Depending on your python setup it might complain about missing `markdown` 
+This can be solved by running `sudo easy_install markdown`
+
