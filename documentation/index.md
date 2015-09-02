@@ -2,19 +2,19 @@
 
 ## Description
 
-Using UIImageJPEGRepresentation to pass the option to compress image passed as TiBlob
+Using `UIImageJPEGRepresentatio`n to pass the option to compress image passed as `TiBlob`
 
 ## Accessing the jpgcompressor Module
 
 To access this module from JavaScript, you would do the following:
-
-	var jpgcompressor = require("com.sideshowcoder.jpgcompressor");
-
+```js
+var jpgcompressor = require("com.sideshowcoder.jpgcompressor");
+```
 ## Reference
 
 ### jpgcompressor.setCompressSize
 
-Set the compress desired size to calculate UIImageJPEGRepresentation factor via compressSize/imageSize
+Set the compress desired size to calculate `UIImageJPEGRepresentation` factor via `compressSize/imageSize`
 
 ### jpgcompressor.compressFactor
 
@@ -24,14 +24,13 @@ Read the compress desired size
 
 Pass image as Blob to be compressed
 
-
 ## Usage
-
-  jpgcompressor.setCompressFactor(1000);
-  var f = Ti.Filesystem.getFile('test.jpg');
-  var img = f.read.blob;
-  var compressedImg = jpgcompressor.compress(img);
-
+```js
+jpgcompressor.setCompressFactor(1000);
+var f = Ti.Filesystem.getFile('test.jpg');
+var img = f.read.blob;
+var compressedImg = jpgcompressor.compress(img);
+```
 ## Author
 
 Philipp Fehre <philipp.fehre@googlemail.com>
