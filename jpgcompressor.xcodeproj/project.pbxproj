@@ -256,7 +256,7 @@
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 i386 x86_64 arm64";
+				VALID_ARCHS = "i386 armv7 x86_64 arm64";
 			};
 			name = Debug;
 		};
@@ -271,7 +271,7 @@
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 i386 x86_64 arm64";
+				VALID_ARCHS = "i386 armv7 x86_64 arm64";
 			};
 			name = Release;
 		};

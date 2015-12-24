@@ -30,7 +30,9 @@ See `example/app.js` and https://github.com/sideshowcoder/jpgcompressor/blob/mas
 
 Testing
 -------
-Run the example app and follow it's log see `example/app.js` for more details
+Build the module via `python build.py` and install it `unzip -o
+com.sideshowcoder.jpgcompressor-iphone-0.5.4.zip -d ~/Library/Application\ Support/Titanium/`
+
 
 Setup
 -----

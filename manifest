@@ -1,4 +1,4 @@
-version: 0.5.3
+version: 0.5.4
 description: Compress JPEG Images using UIImageJPEGRepresentation, and scale using UIGraphicsBeginImageContext
 author: Philipp Fehre <philipp.fehre@googlemail.com>
 license: BSD
@@ -10,5 +10,5 @@ name: jpgcompressor
 moduleid: com.sideshowcoder.jpgcompressor
 guid: ff873835-cf92-4d21-b2c0-0f577f0ce8f3
 platform: iphone
-minsdk: 3.5.0.GA
+minsdk: 5.1.1.GA
 architectures: armv7 i386 x86_64 arm64
